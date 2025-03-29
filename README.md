@@ -1,17 +1,17 @@
 # Logo Animation Portfolio
 
-A modern, responsive portfolio website showcasing logo animation services. Built with React, TypeScript, and Material-UI.
+A modern React-based portfolio website showcasing professional logo animations. Built with TypeScript, Material-UI, and Framer Motion.
 
 ## Features
 
 - 🎨 Modern and responsive design
-- 🎬 Showcase of logo animation portfolio
+- 🎬 Video portfolio with continuous playback
+- 💫 Smooth animations and transitions
 - 📱 Mobile-friendly interface
-- 🎯 Service packages with pricing
-- 📝 Contact form
-- 🔍 FAQ section
-- 🎥 Video showcase with autoplay
-- 🌐 Multi-page navigation
+- 🌐 Multiple animation categories
+- 💬 Contact form integration
+- 📱 WhatsApp support integration
+- 💰 Indian market-focused pricing
 
 ## Technologies Used
 
