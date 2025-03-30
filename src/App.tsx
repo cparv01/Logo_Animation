@@ -5,9 +5,9 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import Portfolio from './components/Portfolio';
-import Services from './components/Services';
-import Contact from './components/Contact';
+import Plans from './components/Plans';
 import FAQ from './components/FAQ';
+import Contact from './components/Contact';
 import TermsOfService from './components/TermsOfService';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import Support from './components/Support';
@@ -22,7 +22,7 @@ const theme = createTheme({
       main: '#ff4081',
     },
     background: {
-      default: '#121212',
+      default: '#000000',
       paper: '#1e1e1e',
     },
   },
@@ -83,9 +83,9 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/portfolio" element={<Portfolio />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/contact" element={<Contact />} />
+              <Route path="/plans" element={<Plans />} />
               <Route path="/faq" element={<FAQ />} />
+              <Route path="/contact" element={<Contact />} />
               <Route path="/terms" element={<TermsOfService />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/support" element={<Support />} />

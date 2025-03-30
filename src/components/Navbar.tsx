@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import {
   AppBar,
@@ -6,112 +6,148 @@ import {
   Typography,
   Button,
   IconButton,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
   Box,
   useTheme,
   useMediaQuery,
+  Container,
+  Menu,
+  MenuItem,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
-const Navbar = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
+const Navbar: React.FC = () => {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [mobileMenuAnchor, setMobileMenuAnchor] = React.useState<null | HTMLElement>(null);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMobileMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setMobileMenuAnchor(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+    setMobileMenuAnchor(null);
+  };
 
   const menuItems = [
     { text: 'Home', path: '/' },
     { text: 'Portfolio', path: '/portfolio' },
-    { text: 'Services', path: '/services' },
+    { text: 'Plans', path: '/plans' },
+    { text: 'FAQ', path: '/faq' },
     { text: 'Contact', path: '/contact' },
   ];
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-
-  const drawer = (
-    <List>
-      {menuItems.map((item) => (
-        <ListItem
-          key={item.text}
-          component={RouterLink}
-          to={item.path}
-          onClick={handleDrawerToggle}
-          sx={{
-            cursor: 'pointer',
-            '&:hover': {
-              backgroundColor: 'rgba(255, 255, 255, 0.1)',
-            },
-          }}
-        >
-          <ListItemText primary={item.text} />
-        </ListItem>
-      ))}
-    </List>
-  );
-
   return (
-    <AppBar position="sticky" sx={{ background: 'rgba(18, 18, 18, 0.8)', backdropFilter: 'blur(10px)' }}>
-      <Toolbar>
-        <Typography
-          variant="h6"
-          component={RouterLink}
-          to="/"
-          sx={{
-            flexGrow: 1,
-            textDecoration: 'none',
-            color: 'inherit',
-            fontWeight: 700,
-          }}
-        >
-          Logo Animation
-        </Typography>
+    <AppBar position="sticky" sx={{ bgcolor: 'white', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+      <Container maxWidth="lg">
+        <Toolbar disableGutters>
+          <Typography
+            variant="h6"
+            noWrap
+            component={RouterLink}
+            to="/"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontWeight: 700,
+              color: '#1a237e',
+              textDecoration: 'none',
+            }}
+          >
+            Logo Animation
+          </Typography>
 
-        {isMobile ? (
-          <>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Drawer
-              variant="temporary"
-              anchor="right"
-              open={mobileOpen}
-              onClose={handleDrawerToggle}
-              ModalProps={{
-                keepMounted: true,
-              }}
-            >
-              {drawer}
-            </Drawer>
-          </>
-        ) : (
-          <Box sx={{ display: 'flex', gap: 2 }}>
-            {menuItems.map((item) => (
-              <Button
-                key={item.text}
-                color="inherit"
-                component={RouterLink}
-                to={item.path}
-                sx={{
-                  '&:hover': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                  },
-                }}
+          {isMobile ? (
+            <>
+              <Box sx={{ flexGrow: 1 }} />
+              <IconButton
+                size="large"
+                aria-label="menu"
+                aria-controls="mobile-menu"
+                aria-haspopup="true"
+                onClick={handleMobileMenu}
+                sx={{ color: '#1a237e' }}
               >
-                {item.text}
-              </Button>
-            ))}
-          </Box>
-        )}
-      </Toolbar>
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="mobile-menu"
+                anchorEl={mobileMenuAnchor}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(mobileMenuAnchor)}
+                onClose={handleClose}
+              >
+                {menuItems.map((item) => (
+                  <MenuItem
+                    key={item.text}
+                    component={RouterLink}
+                    to={item.path}
+                    onClick={handleClose}
+                    sx={{
+                      color: '#1a237e',
+                      '&:hover': {
+                        bgcolor: '#e3f2fd',
+                      },
+                    }}
+                  >
+                    {item.text}
+                  </MenuItem>
+                ))}
+              </Menu>
+            </>
+          ) : (
+            <>
+              <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
+                {menuItems.map((item) => (
+                  <Button
+                    key={item.text}
+                    component={RouterLink}
+                    to={item.path}
+                    sx={{
+                      color: '#1a237e',
+                      mx: 1,
+                      '&:hover': {
+                        bgcolor: '#e3f2fd',
+                      },
+                    }}
+                  >
+                    {item.text}
+                  </Button>
+                ))}
+              </Box>
+              <Box sx={{ flexGrow: 0 }}>
+                <Button
+                  variant="contained"
+                  component={RouterLink}
+                  to="/contact"
+                  sx={{
+                    bgcolor: '#1a237e',
+                    color: 'white',
+                    '&:hover': {
+                      bgcolor: '#0d47a1',
+                    },
+                  }}
+                >
+                  Get Started
+                </Button>
+              </Box>
+            </>
+          )}
+        </Toolbar>
+      </Container>
     </AppBar>
   );
 };
