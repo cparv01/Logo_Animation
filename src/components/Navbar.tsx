@@ -14,6 +14,7 @@ import {
   MenuItem,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import LOGO_SAVA_AI from '../assets/images/LOGO_SAVA_AI.png';
 
 const Navbar: React.FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -43,25 +44,22 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <AppBar position="sticky" sx={{ bgcolor: 'white', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}>
+    <AppBar 
+      position="sticky" 
+      sx={{ 
+        bgcolor: '#000000',
+        boxShadow: 'none',
+        borderBottom: 'none'
+      }}
+    >
       <Container maxWidth="lg">
-        <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component={RouterLink}
-            to="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontWeight: 700,
-              color: '#1a237e',
-              textDecoration: 'none',
-            }}
-          >
-            Logo Animation
-          </Typography>
-
+        <Toolbar 
+          disableGutters 
+          sx={{ 
+            minHeight: '80px !important',
+            py: 1
+          }}
+        >
           {isMobile ? (
             <>
               <Box sx={{ flexGrow: 1 }} />
@@ -71,7 +69,7 @@ const Navbar: React.FC = () => {
                 aria-controls="mobile-menu"
                 aria-haspopup="true"
                 onClick={handleMobileMenu}
-                sx={{ color: '#1a237e' }}
+                sx={{ color: '#ffffff' }}
               >
                 <MenuIcon />
               </IconButton>
@@ -89,6 +87,18 @@ const Navbar: React.FC = () => {
                 }}
                 open={Boolean(mobileMenuAnchor)}
                 onClose={handleClose}
+                PaperProps={{
+                  sx: {
+                    bgcolor: '#000000',
+                    color: '#ffffff',
+                    '& .MuiMenuItem-root': {
+                      color: '#ffffff',
+                      '&:hover': {
+                        bgcolor: 'rgba(255, 255, 255, 0.1)',
+                      },
+                    },
+                  },
+                }}
               >
                 {menuItems.map((item) => (
                   <MenuItem
@@ -97,9 +107,9 @@ const Navbar: React.FC = () => {
                     to={item.path}
                     onClick={handleClose}
                     sx={{
-                      color: '#1a237e',
+                      color: '#ffffff',
                       '&:hover': {
-                        bgcolor: '#e3f2fd',
+                        bgcolor: 'rgba(255, 255, 255, 0.1)',
                       },
                     }}
                   >
@@ -117,10 +127,11 @@ const Navbar: React.FC = () => {
                     component={RouterLink}
                     to={item.path}
                     sx={{
-                      color: '#1a237e',
+                      color: '#ffffff',
                       mx: 1,
+                      py: 1,
                       '&:hover': {
-                        bgcolor: '#e3f2fd',
+                        bgcolor: 'rgba(255, 255, 255, 0.1)',
                       },
                     }}
                   >
@@ -134,10 +145,11 @@ const Navbar: React.FC = () => {
                   component={RouterLink}
                   to="/contact"
                   sx={{
-                    bgcolor: '#1a237e',
-                    color: 'white',
+                    bgcolor: '#ffffff',
+                    color: '#000000',
+                    py: 1,
                     '&:hover': {
-                      bgcolor: '#0d47a1',
+                      bgcolor: 'rgba(255, 255, 255, 0.9)',
                     },
                   }}
                 >

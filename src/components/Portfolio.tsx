@@ -24,6 +24,7 @@ import MinimalistVideo from '../assets/images/Minimalist_Logo_Animation.mp4';
 import ThreeDVideo from '../assets/images/3D_Animation.mp4';
 import DynamicVideo from '../assets/images/Dynamic_Logo_Animation.mp4';
 import NikeVideo from '../assets/images/The_3D_Nike_design.mp4';
+import HomePageVideo from '../assets/images/home_page.mp4';
 import MorphingImage from '../assets/images/Morphing_Logo.jpg';
 
 const MotionBox = motion(Box);
@@ -82,6 +83,14 @@ const portfolioItems = [
     category: '3d',
     image: MorphingImage,
     video: NikeVideo,
+  },
+  {
+    id: 5,
+    title: 'Creative Logo Animation',
+    description: 'Innovative and engaging logo animation design',
+    category: 'dynamic',
+    image: MorphingImage,
+    video: HomePageVideo,
   },
 ];
 

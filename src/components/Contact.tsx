@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Box,
   Container,
   Typography,
   Grid,
-  TextField,
-  Button,
   Paper,
   IconButton,
-  Snackbar,
-  Alert,
+  Button,
   useTheme,
 } from '@mui/material';
 import { motion } from 'framer-motion';
@@ -22,68 +19,21 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 
 const MotionBox = motion(Box);
 
-interface ContactFormData {
-  name: string;
-  email: string;
-  company: string;
-  message: string;
-}
-
 const Contact = () => {
   const theme = useTheme();
-  const [formData, setFormData] = useState<ContactFormData>({
-    name: '',
-    email: '',
-    company: '',
-    message: '',
-  });
-  const [snackbar, setSnackbar] = useState({
-    open: false,
-    message: '',
-    severity: 'success' as 'success' | 'error',
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Here you would typically send the form data to your backend
-    console.log('Form submitted:', formData);
-    setSnackbar({
-      open: true,
-      message: 'Thank you for your message! We will get back to you soon.',
-      severity: 'success',
-    });
-    setFormData({
-      name: '',
-      email: '',
-      company: '',
-      message: '',
-    });
-  };
-
-  const handleCloseSnackbar = () => {
-    setSnackbar((prev) => ({ ...prev, open: false }));
-  };
 
   const contactInfo = [
     {
       icon: <EmailIcon />,
       title: 'Email',
-      content: 'contact@logoanimation.com',
-      link: 'mailto:contact@logoanimation.com',
+      content: 'savanjaviya1@gmail.com',
+      link: 'mailto:savanjaviya1@gmail.com',
     },
     {
       icon: <PhoneIcon />,
       title: 'Phone',
-      content: '+1 (555) 123-4567',
-      link: 'tel:+15551234567',
+      content: '+91 96019 49394',
+      link: 'tel:+919601949394',
     },
     {
       icon: <LocationOnIcon />,
@@ -110,96 +60,16 @@ const Contact = () => {
         </Typography>
 
         <Grid container spacing={4}>
-          <Grid item xs={12} md={6}>
-            <MotionBox
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Paper
-                elevation={3}
-                sx={{
-                  p: 4,
-                  height: '100%',
-                  backgroundColor: 'background.paper',
-                  borderRadius: '16px',
-                }}
-              >
-                <form onSubmit={handleSubmit}>
-                  <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        fullWidth
-                        label="Name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        variant="outlined"
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        fullWidth
-                        label="Email"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        variant="outlined"
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        fullWidth
-                        label="Company"
-                        name="company"
-                        value={formData.company}
-                        onChange={handleChange}
-                        variant="outlined"
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        fullWidth
-                        label="Message"
-                        name="message"
-                        multiline
-                        rows={4}
-                        value={formData.message}
-                        onChange={handleChange}
-                        variant="outlined"
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Button
-                        type="submit"
-                        variant="contained"
-                        size="large"
-                        fullWidth
-                        sx={{
-                          borderRadius: '8px',
-                          py: 1.5,
-                          textTransform: 'none',
-                          fontSize: '1.1rem',
-                        }}
-                      >
-                        Send Message
-                      </Button>
-                    </Grid>
-                  </Grid>
-                </form>
-              </Paper>
-            </MotionBox>
-          </Grid>
-
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12}>
             <MotionBox
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
             >
               <Paper
                 elevation={3}
@@ -208,6 +78,10 @@ const Contact = () => {
                   height: '100%',
                   backgroundColor: 'background.paper',
                   borderRadius: '16px',
+                  width: 'fit-content',
+                  minWidth: '300px',
+                  display: 'flex',
+                  flexDirection: 'column',
                 }}
               >
                 <Typography variant="h5" gutterBottom>
@@ -224,6 +98,7 @@ const Contact = () => {
                       display: 'flex',
                       alignItems: 'center',
                       mb: 3,
+                      width: '100%',
                     }}
                   >
                     <Box
@@ -285,21 +160,6 @@ const Contact = () => {
             </MotionBox>
           </Grid>
         </Grid>
-
-        <Snackbar
-          open={snackbar.open}
-          autoHideDuration={6000}
-          onClose={handleCloseSnackbar}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-        >
-          <Alert
-            onClose={handleCloseSnackbar}
-            severity={snackbar.severity}
-            sx={{ width: '100%' }}
-          >
-            {snackbar.message}
-          </Alert>
-        </Snackbar>
       </Container>
     </Box>
   );

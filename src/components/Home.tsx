@@ -23,7 +23,7 @@ import MinimalistVideo from '../assets/images/Minimalist_Logo_Animation.mp4';
 import ThreeDVideo from '../assets/images/3D_Animation.mp4';
 import DynamicVideo from '../assets/images/Dynamic_Logo_Animation.mp4';
 import MorphingImage from '../assets/images/Morphing_Logo.jpg';
-import HomePageVideo from '../assets/images/home_page.mp4';
+import SavaAIVideo from '../assets/images/sava_ai_animated_logo.mp4';
 
 interface Feature {
   title: string;
@@ -78,6 +78,26 @@ const features: Feature[] = [
 const Home: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [videoError, setVideoError] = useState<string | null>(null);
+  const [isVideoLoading, setIsVideoLoading] = useState(true);
+
+  const handleVideoError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    const videoElement = e.target as HTMLVideoElement;
+    console.error('Video loading error:', {
+      error: videoElement.error,
+      networkState: videoElement.networkState,
+      readyState: videoElement.readyState,
+      src: videoElement.src
+    });
+    setVideoError(`Failed to load video: ${videoElement.error?.message || 'Unknown error'}`);
+    setIsVideoLoading(false);
+  };
+
+  const handleVideoLoad = () => {
+    console.log('Video loaded successfully');
+    setIsVideoLoading(false);
+    setVideoError(null);
+  };
 
   return (
     <Box>
@@ -122,6 +142,8 @@ const Home: React.FC = () => {
                   <Button
                     variant="contained"
                     size="large"
+                    component={RouterLink}
+                    to="/portfolio"
                     sx={{
                       bgcolor: '#fff',
                       color: '#1a237e',
@@ -135,6 +157,8 @@ const Home: React.FC = () => {
                   <Button
                     variant="outlined"
                     size="large"
+                    component={RouterLink}
+                    to="/contact"
                     sx={{
                       borderColor: '#fff',
                       color: '#fff',
@@ -151,35 +175,23 @@ const Home: React.FC = () => {
             </Grid>
             <Grid item xs={12} md={6}>
               <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                style={{ width: '100%', maxWidth: '600px', margin: '0 auto' }}
               >
-                <Box
-                  sx={{
+                <video
+                  src={SavaAIVideo}
+                  autoPlay
+                  loop
+                  muted
+                  style={{
                     width: '100%',
-                    maxWidth: 500,
+                    height: 'auto',
+                    borderRadius: '8px',
                     display: 'block',
-                    margin: '0 auto',
-                    position: 'relative',
-                    borderRadius: '16px',
-                    overflow: 'hidden',
-                    boxShadow: '0 0 20px rgba(255,255,255,0.3)',
                   }}
-                >
-                  <video
-                    src={HomePageVideo}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    style={{
-                      width: '100%',
-                      height: 'auto',
-                      display: 'block',
-                    }}
-                  />
-                </Box>
+                />
               </motion.div>
             </Grid>
           </Grid>
